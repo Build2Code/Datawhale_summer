@@ -29,7 +29,7 @@ custom_channels:
   simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
 即赋予pytorch优先级，之后运行代码就不会报错，速度还贼快。
 
-3.安装后成功验证在prompt可以云心pytorch，但是启动anaconda的jupyter notebook之后加载不出pytorch模块
+3.安装后成功验证在prompt终端可以运行pytorch，但是启动anaconda的jupyter notebook之后加载不出pytorch模块
   分析发现是prompt的环境跟jupyter不同，因此需要在prompt的环境中重新下载jupyter notebook
   即在prompt中安装jupyter notebook的一系列依赖库：
   conda install jupyter
