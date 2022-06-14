@@ -1,0 +1,41 @@
+安装的过程参考datawhale教程链接：
+https://datawhalechina.github.io/thorough-pytorch/%E7%AC%AC%E4%B8%80%E7%AB%A0/1.2%20PyTorch%E7%9A%84%E5%AE%89%E8%A3%85.html
+
+在其中主要遇到以下三个问题：
+1.在安装的过程中忽略了“换源”的重要性，一开始接触这部分的时候只是大致了解一下，并没有实操，但是在通过
+  anaconda的prompt安装pytorch的过程中，总是会遇到下载速度过慢，并且等了好长一段时间之后出现下载中断
+  的问题，后来发现是在下载的时候默认用的是国外的线路，并没有换成清华源，因此创建“.condarc”并粘贴相关
+  内容。
+
+2.创建“.condarc”并粘贴相关内容后，会出现报错，也就是
+  Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+  PackagesNotFoundError: The following packages are not available from current channels
+  分析发现是pytorch某些依赖包在当前频道中不可用，因此修改“.condarc”内容成：
+  channels:
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/win-64/# 把pytorch抬上去哈哈
+  - defaults
+show_channel_urls: true
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+即赋予pytorch优先级，之后运行代码就不会报错，速度还贼快。
+
+3.安装后成功验证在prompt可以云心pytorch，但是启动anaconda的jupyter notebook之后加载不出pytorch模块
+  分析发现是prompt的环境跟jupyter不同，因此需要在prompt的环境中重新下载jupyter notebook
+  即在prompt中安装jupyter notebook的一系列依赖库：
+  conda install jupyter
+  conda install nb_conda
+  重启 jupyter notebook 后再进入，选择对应的 Kernel 新建文件即可
+  （参考博客：https://blog.csdn.net/fyfugoyfa/article/details/122908478?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-122908478-blog-100694574.pc_relevant_default&spm=1001.2101.3001.4242.1&utm_relevant_index=3）
+  
+  
+  
